@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaguar Solar | Painel Executivo</title>
+    <meta name="author" content="Genivaldo Marques de Oliveira Neto">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="saas-header">
+        <div class="header-brand">
+            <img src="logo.jpg" alt="Logo Jaguar Solar" class="logo-img">
+            <span class="logo-text">Jaguar<strong class="text-orange">Solar</strong></span>
+        </div>
+        <div class="header-actions">
+            <div class="user-profile">
+                <div class="user-info">
+                    <span class="user-name">Genivaldo Neto</span>
+                    <span class="user-role">Administrador</span>
+                </div>
+                <div class="avatar">GN</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-layout">
+        <div class="page-header">
+            <h1>Visão Geral do Negócio</h1>
+        </div>
+
+        <div class="kpi-grid glass-panel kpi-container">
+            <div class="kpi-card border-blue">
+                <div class="kpi-header"><span>Clientes Atendidos</span><i class="ph ph-users text-blue"></i></div>
+                <strong id="dashClientes">0</strong>
+            </div>
+            <div class="kpi-card border-orange">
+                <div class="kpi-header"><span>Volume Projetado</span><i class="ph ph-currency-circle-dollar text-orange"></i></div>
+                <strong id="dashVolume">R$ 0,00</strong>
+            </div>
+            <div class="kpi-card border-blue">
+                <div class="kpi-header"><span>Vistorias Pendentes</span><i class="ph ph-clock-countdown text-blue icon-large"></i></div>
+                <strong id="dashVisitas">0</strong>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <section class="glass-panel form-panel">
+                <div class="panel-title">
+                    <h2><i class="ph ph-list-plus text-orange"></i> Criar Nova Proposta</h2>
+                </div>
+                <form id="formularioSolar">
+                    <div class="form-group">
+                        <label for="nome">Nome do Cliente ou Entidade</label>
+                        <div class="input-with-icon">
+                            <i class="ph ph-buildings"></i>
+                            <input type="text" id="nome" required placeholder="Ex: Henrique Neto | Padaria do Pereira">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail para Envio da Proposta</label>
+                        <div class="input-with-icon">
+                            <i class="ph ph-envelope-simple"></i>
+                            <input type="email" id="email" required placeholder="cliente@domínio.com.br">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumo">Consumo Médio Mensal (kWh)</label>
+                        <div class="input-with-icon">
+                            <i class="ph ph-lightning"></i>
+                            <input type="number" id="consumo" required placeholder="Ex: 1500" min="50">
+                        </div>
+                    </div>
+                    <button type="submit" id="botaoEnviar" class="btn-primary mt-10">
+                        <span id="textoBotao">Dimensionar Sistema Solar</span>
+                        <div id="carregandoBotao" class="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </section>
+
+            <section class="glass-panel results-panel">
+                <div class="panel-title">
+                    <h2><i class="ph ph-chart-bar text-blue"></i> Resumo Técnico</h2>
+                </div>
+                
+                <div id="estadoVazio" class="empty-state">
+                    <div class="empty-icon"><i class="ph ph-solar-panel"></i></div>
+                    <h3>Aguardando informações</h3>
+                    <p class="text-subtitle">Preencha os dados no formulário para gerar o dimensionamento e os custos.</p>
+                </div>
+
+                <div id="resultadoDestaque" class="resultado-container" style="display: none;">
+                    <div class="alert-success">
+                        <i class="ph-fill ph-check-circle"></i> Dimensionamento concluído!
+                    </div>
+                    <p id="resumoTexto" class="summary-text"></p>
+                    
+                    <div class="agendamento-box">
+                        <h4><i class="ph ph-calendar-plus text-blue"></i> Agendar Vistoria Técnica</h4>
+                        <div class="agendamento-flex">
+                            <input type="date" id="dataVistoria" class="input-date">
+                            <button id="botaoAgendar" class="btn-confirm">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="glass-panel table-panel">
+            <div class="table-header">
+                <h2><i class="ph ph-database text-blue"></i> Gestão de Propostas (CRM)</h2>
+                <div class="search-box">
+                    <div class="input-with-icon">
+                        <i class="ph ph-magnifying-glass text-muted"></i>
+                        <input type="text" id="campoPesquisa" class="input-search" placeholder="Pesquisar por cliente...">
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nº Ref</th>
+                            <th>Cliente</th>
+                            <th>Projeto Base</th>
+                            <th>Status da Vistoria</th>
+                            <th class="text-center">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaPropostas"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="saas-footer">
+        <div class="footer-content">
+            <div class="footer-core">
+                <span class="logo-text">Jaguar<strong class="text-orange">Solar</strong></span>
+                <div class="footer-text-stack">
+                    <span class="copyright">&copy; Desenvolvido por Genivaldo Neto</span>
+                    <span class="academic-info">Projeto de Programação Web I | Prof: Henrique Neto (ADS | IFCE Jaguaruana)</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>

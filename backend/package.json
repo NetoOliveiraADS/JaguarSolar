@@ -1,0 +1,17 @@
+{
+  "name": "jaguarsolar",
+  "version": "1.0.0",
+  "description": "Jaguar Solar - Plataforma de Dimensionamento e CRM",
+  "author": "Genivaldo Marques de Oliveira Neto",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  }
+}
